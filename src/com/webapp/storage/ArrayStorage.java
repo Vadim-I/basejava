@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    private Resume[] storage = new Resume[10000];
+    private Resume[] storage = new Resume[10_000];
     private int size = 0;
 
     public void clear() {
@@ -17,17 +17,18 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        if (getIndex(resume.getUuid()) == -1) {
-            System.out.println("This resume is not present");
+        int index = getIndex(resume.getUuid());
+        if (index == -1) {
+            System.out.println("Resume " + resume.getUuid() + " is not present");
         } else {
-            storage[getIndex(resume.getUuid())] = resume;
+            storage[index] = resume;
         }
     }
 
     public void save(Resume resume) {
         if (getIndex(resume.getUuid()) != -1) {
-            System.out.println("This resume is present already");
-        } else if (size > 10000) {
+            System.out.println("Resume " + resume.getUuid() + " is present already");
+        } else if (size > storage.length) {
             System.out.println("Resume storage is full");
         } else {
             storage[size] = resume;
@@ -36,19 +37,20 @@ public class ArrayStorage {
     }
 
     public Resume get(String uuid) {
-        if (getIndex(uuid) == -1) {
-            System.out.print("This resume is not present: ");
+        int index = getIndex(uuid);
+        if (index == -1) {
+            System.out.print("Resume " + uuid + " is not present: ");
             return null;
-        } else {
-            return storage[getIndex(uuid)];
         }
+        return storage[index];
     }
 
     public void delete(String uuid) {
-        if (getIndex(uuid) == -1) {
-            System.out.println("This resume is not present");
+        int index = getIndex(uuid);
+        if (index == -1) {
+            System.out.println("Resume " + uuid + " is not present");
         } else {
-            storage[getIndex(uuid)] = storage[size - 1];
+            storage[index] = storage[size - 1];
             storage[size - 1] = null;
             size--;
         }
