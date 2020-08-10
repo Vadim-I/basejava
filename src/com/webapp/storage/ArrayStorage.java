@@ -2,51 +2,22 @@ package com.webapp.storage;
 
 import com.webapp.model.Resume;
 
-import java.util.Arrays;
-
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage extends AbstractArrayStorage {
 
-    public void clear() {
-        Arrays.fill(storage, 0, size, null);
-        size = 0;
+    @Override
+    protected void saveResume(Resume resume, int index) {
+        storage[size] = resume;
+        size++;
     }
 
-    public void update(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index == -1) {
-            System.out.println("Resume " + resume.getUuid() + " is not present");
-        } else {
-            storage[index] = resume;
-        }
-    }
-
-    public void save(Resume resume) {
-        if (getIndex(resume.getUuid()) != -1) {
-            System.out.println("Resume " + resume.getUuid() + " is present already");
-        } else if (size > STORAGE_LIMIT) {
-            System.out.println("Resume storage is full");
-        } else {
-            storage[size] = resume;
-            size++;
-        }
-    }
-
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index == -1) {
-            System.out.println("Resume " + uuid + " is not present");
-        } else {
-            storage[index] = storage[size - 1];
-            storage[size - 1] = null;
-            size--;
-        }
-    }
-
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
+    @Override
+    protected void deleteResume(int index) {
+        storage[index] = storage[size - 1];
+        storage[size - 1] = null;
+        size--;
     }
 
     protected int getIndex(String uuid) {

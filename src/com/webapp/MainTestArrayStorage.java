@@ -1,14 +1,14 @@
 package com.webapp;
 
 import com.webapp.model.Resume;
-import com.webapp.storage.ArrayStorage;
+import com.webapp.storage.SortedArrayStorage;
 import com.webapp.storage.Storage;
 
 /**
- * Test for your com.webapp.storage.ArrayStorage implementation
+ * Test for com.webapp.storage.SortedArrayStorage implementation
  */
 public class MainTestArrayStorage {
-    static final Storage ARRAY_STORAGE = new ArrayStorage();
+    static final Storage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
         Resume r1 = new Resume();

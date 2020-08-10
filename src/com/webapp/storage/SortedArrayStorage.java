@@ -4,27 +4,26 @@ import com.webapp.model.Resume;
 
 import java.util.Arrays;
 
+/**
+ * Array based sorted storage for Resumes
+ */
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public void clear() {
+    protected void saveResume(Resume resume, int index) {
+        int savedIndex = -index - 1;
+        System.arraycopy(storage, savedIndex, storage, savedIndex + 1, size - savedIndex);
+        storage[savedIndex] = resume;
+        size++;
     }
 
     @Override
-    public void update(Resume r) {
-    }
-
-    @Override
-    public void save(Resume r) {
-    }
-
-    @Override
-    public void delete(String uuid) {
-    }
-
-    @Override
-    public Resume[] getAll() {
-        return new Resume[0];
+    protected void deleteResume(int index) {
+        if (index < size - 1) {
+            System.arraycopy(storage, index + 1, storage, index, size - 1 - index);
+        }
+        storage[size - 1] = null;
+        size--;
     }
 
     @Override
