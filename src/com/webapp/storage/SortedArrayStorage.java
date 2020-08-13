@@ -14,7 +14,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         int savedIndex = -index - 1;
         System.arraycopy(storage, savedIndex, storage, savedIndex + 1, size - savedIndex);
         storage[savedIndex] = resume;
-        size++;
     }
 
     @Override
@@ -22,8 +21,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         if (index < size - 1) {
             System.arraycopy(storage, index + 1, storage, index, size - 1 - index);
         }
-        storage[size - 1] = null;
-        size--;
     }
 
     @Override
