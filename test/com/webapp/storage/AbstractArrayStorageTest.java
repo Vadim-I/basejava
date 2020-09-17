@@ -57,11 +57,15 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void getAll() throws Exception {
-        Resume[] array = storage.getAll();
-        Assert.assertEquals(3, array.length);
-        Assert.assertEquals(RESUME_1, array[0]);
-        Assert.assertEquals(RESUME_2, array[1]);
-        Assert.assertEquals(RESUME_3, array[2]);
+        try {
+            Resume[] resumes = storage.getAll();
+            Assert.assertEquals(3, resumes.length);
+            Resume[] resumesTest = {RESUME_1, RESUME_2, RESUME_3};
+            Assert.assertArrayEquals(resumesTest, resumes);
+            }
+        catch (Exception e) {
+            Assert.fail("Arrays are not equal");
+        }
     }
 
     @Test
