@@ -3,7 +3,7 @@ package com.webapp.storage;
 import com.webapp.model.Resume;
 
 /**
- * Array based storage for Resumes
+ * Storage for Resumes
  */
 public interface Storage {
 
