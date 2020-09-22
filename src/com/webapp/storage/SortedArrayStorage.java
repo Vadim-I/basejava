@@ -10,14 +10,14 @@ import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
-    protected void saveResumeDef(Resume resume, int index) {
+    protected void recordResume(Resume resume, int index) {
         int savedIndex = -index - 1;
         System.arraycopy(storage, savedIndex, storage, savedIndex + 1, size - savedIndex);
         storage[savedIndex] = resume;
     }
 
     @Override
-    protected void deleteResumeDef(int index) {
+    protected void fillDeletedResume(int index) {
         if (index < size - 1) {
             System.arraycopy(storage, index + 1, storage, index, size - 1 - index);
         }

@@ -6,8 +6,6 @@ import com.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
-    public abstract void clear();
-
     public void update(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (index < 0) {
@@ -52,8 +50,4 @@ public abstract class AbstractStorage implements Storage {
     }
 
     protected abstract void deleteResume(int index);
-
-    public abstract Resume[] getAll();
-
-    public abstract int size();
 }
