@@ -1,5 +1,7 @@
 package com.webapp.storage;
 
+import com.webapp.exception.ExistStorageException;
+import com.webapp.exception.NotExistStorageException;
 import com.webapp.model.Resume;
 
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.List;
 /**
  * ListStorage for Resumes
  */
-public abstract class ListStorage extends AbstractStorage {
+public class ListStorage extends AbstractStorage {
 
     private final List<Resume> list = new ArrayList<>();
 
@@ -17,27 +19,46 @@ public abstract class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void updateResume(Resume resume, int index) {
-        list.set(index, resume);
+    protected void updateResume(Resume resume) {
+        int index = getIndex(resume.getUuid());
+        if (index < 0) {
+            throw new NotExistStorageException(resume.getUuid());
+        } else {
+            list.set(index, resume);
+        }
     }
 
     @Override
-    protected void saveResume(Resume resume, int index) {
-        list.add(resume);
+    protected void saveResume(Resume resume) {
+        int index = getIndex(resume.getUuid());
+        if (index >= 0) {
+            throw new ExistStorageException(resume.getUuid());
+        } else {
+            list.add(resume);
+        }
     }
 
     @Override
-    protected Resume getResume(int index) {
+    protected Resume getResume(String uuid) {
+        int index = getIndex(uuid);
+        if (index < 0) {
+            throw new NotExistStorageException(uuid);
+        }
         return list.get(index);
     }
 
     @Override
-    protected void deleteResume(int index) {
-        list.remove(index);
+    protected void deleteResume(String uuid) {
+        int index = getIndex(uuid);
+        if (index < 0) {
+            throw new NotExistStorageException(uuid);
+        } else {
+            list.remove(index);
+        }
     }
 
     public Resume[] getAll() {
-        return (Resume[]) list.toArray();
+        return list.toArray(new Resume[0]);
     }
 
     public int size() {

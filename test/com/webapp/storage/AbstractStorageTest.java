@@ -8,9 +8,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public abstract class AbstractArrayStorageTest {
+public abstract class AbstractStorageTest {
 
-    private Storage storage;
+    private final Storage storage;
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
@@ -20,16 +20,16 @@ public abstract class AbstractArrayStorageTest {
     private static final Resume RESUME_3 = new Resume(UUID_3);
     private static final Resume RESUME_4 = new Resume(UUID_4);
 
-    public AbstractArrayStorageTest(Storage storage) {
+    public AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 
     @Before
     public void setUp() throws Exception {
         storage.clear();
-        storage.save(new Resume(UUID_1));
-        storage.save(new Resume(UUID_2));
-        storage.save(new Resume(UUID_3));
+        storage.save(RESUME_1);
+        storage.save(RESUME_2);
+        storage.save(RESUME_3);
     }
 
     @Test
@@ -57,14 +57,14 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void getAll() throws Exception {
+        Resume[] resumes = storage.getAll();
+        Resume[] resumesTest = {RESUME_1, RESUME_2, RESUME_3};
         try {
-            Resume[] resumes = storage.getAll();
             Assert.assertEquals(3, resumes.length);
-            Resume[] resumesTest = {RESUME_1, RESUME_2, RESUME_3};
             Assert.assertArrayEquals(resumesTest, resumes);
             }
         catch (Exception e) {
-            Assert.fail("Arrays are not equal");
+            Assert.fail("Resume arrays are not equal");
         }
     }
 
@@ -80,6 +80,7 @@ public abstract class AbstractArrayStorageTest {
         storage.save(RESUME_1);
     }
 
+    // test for array classes (ArrayStorageTest, SortedArrayStorageTest)
     @Test(expected = StorageException.class)
     public void saveOverflow() throws Exception {
         try {

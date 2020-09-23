@@ -1,5 +1,7 @@
 package com.webapp.storage;
 
+import com.webapp.exception.ExistStorageException;
+import com.webapp.exception.NotExistStorageException;
 import com.webapp.exception.StorageException;
 import com.webapp.model.Resume;
 
@@ -20,13 +22,21 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void updateResume(Resume resume, int index) {
-        storage[index] = resume;
+    protected void updateResume(Resume resume) {
+        int index = getIndex(resume.getUuid());
+        if (index < 0) {
+            throw new NotExistStorageException(resume.getUuid());
+        } else {
+            storage[index] = resume;
+        }
     }
 
     @Override
-    protected void saveResume(Resume resume, int index) {
-        if (size == STORAGE_LIMIT) {
+    protected void saveResume(Resume resume) {
+        int index = getIndex(resume.getUuid());
+        if (index >= 0) {
+            throw new ExistStorageException(resume.getUuid());
+        } else if (size == STORAGE_LIMIT) {
             throw new StorageException("Resume storage is full", resume.getUuid());
         } else {
             recordResume(resume, index);
@@ -37,15 +47,24 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected abstract void recordResume(Resume resume, int index);
 
     @Override
-    protected Resume getResume(int index) {
+    protected Resume getResume(String uuid) {
+        int index = getIndex(uuid);
+        if (index < 0) {
+            throw new NotExistStorageException(uuid);
+        }
         return storage[index];
     }
 
     @Override
-    protected void deleteResume(int index) {
-        fillDeletedResume(index);
-        storage[size - 1] = null;
-        size--;
+    protected void deleteResume(String uuid) {
+        int index = getIndex(uuid);
+        if (index < 0) {
+            throw new NotExistStorageException(uuid);
+        } else {
+            fillDeletedResume(index);
+            storage[size - 1] = null;
+            size--;
+        }
     }
 
     protected abstract void fillDeletedResume(int index);
