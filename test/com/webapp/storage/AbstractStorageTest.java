@@ -62,8 +62,7 @@ public abstract class AbstractStorageTest {
         try {
             Assert.assertEquals(3, resumes.length);
             Assert.assertArrayEquals(resumesTest, resumes);
-            }
-        catch (Exception e) {
+        } catch (Exception e) {
             Assert.fail("Resume arrays are not equal");
         }
     }
