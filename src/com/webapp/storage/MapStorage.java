@@ -2,9 +2,9 @@ package com.webapp.storage;
 
 import com.webapp.model.Resume;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * MapStorage for Resumes < uuid, resume >
@@ -38,13 +38,8 @@ public class MapStorage extends AbstractStorage {
     }
 
     public Resume[] getAll() {
-        String[] uuids = map.keySet().toArray(new String[0]);
-        Arrays.sort(uuids);
-        Resume[] values = new Resume[map.size()];
-        for (int i = 0; i < map.size(); i++) {
-            values[i] = map.get(uuids[i]);
-        }
-        return values;
+        TreeMap<String, Resume> sortedMap = new TreeMap<>(map);
+        return sortedMap.values().toArray(new Resume[0]);
     }
 
     public int size() {
