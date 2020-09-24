@@ -1,7 +1,5 @@
 package com.webapp.storage;
 
-import com.webapp.exception.ExistStorageException;
-import com.webapp.exception.NotExistStorageException;
 import com.webapp.model.Resume;
 
 import java.util.ArrayList;
@@ -19,42 +17,23 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void updateResume(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            list.set(index, resume);
-        }
+    protected void updateResume(Resume resume, Object index) {
+        list.set((Integer) index, resume);
     }
 
     @Override
-    protected void saveResume(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index >= 0) {
-            throw new ExistStorageException(resume.getUuid());
-        } else {
-            list.add(resume);
-        }
+    protected void saveResume(Resume resume, Object index) {
+        list.add(resume);
     }
 
     @Override
-    protected Resume getResume(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        return list.get(index);
+    protected Resume getResume(Object index) {
+        return list.get((Integer) index);
     }
 
     @Override
-    protected void deleteResume(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        } else {
-            list.remove(index);
-        }
+    protected void deleteResume(Object index) {
+        list.remove(((Integer) index).intValue());
     }
 
     public Resume[] getAll() {
@@ -65,12 +44,18 @@ public class ListStorage extends AbstractStorage {
         return list.size();
     }
 
-    protected int getIndex(String uuid) {
+    @Override
+    protected Integer getKey(String uuid) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getUuid().equals(uuid)) {
                 return i;
             }
         }
         return -1;
+    }
+
+    @Override
+    protected boolean isExist(Object index) {
+        return (Integer) index >= 0;
     }
 }

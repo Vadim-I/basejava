@@ -1,7 +1,5 @@
 package com.webapp.storage;
 
-import com.webapp.exception.ExistStorageException;
-import com.webapp.exception.NotExistStorageException;
 import com.webapp.exception.StorageException;
 import com.webapp.model.Resume;
 
@@ -22,49 +20,32 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void updateResume(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            storage[index] = resume;
-        }
+    protected void updateResume(Resume resume, Object index) {
+        storage[(Integer) index] = resume;
     }
 
     @Override
-    protected void saveResume(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index >= 0) {
-            throw new ExistStorageException(resume.getUuid());
-        } else if (size == STORAGE_LIMIT) {
+    protected void saveResume(Resume resume, Object index) {
+        if (size == STORAGE_LIMIT) {
             throw new StorageException("Resume storage is full", resume.getUuid());
         } else {
-            recordResume(resume, index);
+            recordNewResume(resume, (Integer) index);
             size++;
         }
     }
 
-    protected abstract void recordResume(Resume resume, int index);
+    protected abstract void recordNewResume(Resume resume, int index);
 
     @Override
-    protected Resume getResume(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        return storage[index];
+    protected Resume getResume(Object index) {
+        return storage[(Integer) index];
     }
 
     @Override
-    protected void deleteResume(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        } else {
-            fillDeletedResume(index);
-            storage[size - 1] = null;
-            size--;
-        }
+    protected void deleteResume(Object index) {
+        fillDeletedResume((Integer) index);
+        storage[size - 1] = null;
+        size--;
     }
 
     protected abstract void fillDeletedResume(int index);
@@ -77,5 +58,10 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return size;
     }
 
-    protected abstract int getIndex(String uuid);
+    protected abstract Integer getKey(String uuid);
+
+    @Override
+    protected boolean isExist(Object index) {
+        return (Integer) index >= 0;
+    }
 }

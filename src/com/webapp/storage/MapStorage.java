@@ -1,6 +1,5 @@
 package com.webapp.storage;
 
-import com.webapp.exception.NotExistStorageException;
 import com.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -19,47 +18,46 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void updateResume(Resume resume) {
-        map.put(resume.getUuid(), resume);
+    protected void updateResume(Resume resume, Object uuid) {
+        map.put(String.valueOf(uuid), resume);
     }
 
     @Override
-    protected void saveResume(Resume resume) {
-        map.put(resume.getUuid(), resume);
+    protected void saveResume(Resume resume, Object uuid) {
+        map.put(String.valueOf(uuid), resume);
     }
 
     @Override
-    protected Resume getResume(String uuid) {
-        return map.get(uuid);
+    protected Resume getResume(Object uuid) {
+        return map.get(String.valueOf(uuid));
     }
 
     @Override
-    protected void deleteResume(String uuid) {
-        if (!(map.containsKey(uuid))) {
-            throw new NotExistStorageException(uuid);
-        } else {
-            map.remove(uuid);
-        }
+    protected void deleteResume(Object uuid) {
+        map.remove(String.valueOf(uuid));
     }
 
     public Resume[] getAll() {
-        String[] uuids = new String[map.size()];
-        Resume[] values = new Resume[map.size()];
-        int index = 0;
-        for (Resume resume : map.values()) {
-            uuids[index] = resume.getUuid();
-            index++;
-        }
+        String[] uuids = map.keySet().toArray(new String[0]);
         Arrays.sort(uuids);
-        index = 0;
-        for (String uuid : uuids) {
-            values[index] = map.get(uuid);
-            index++;
+        Resume[] values = new Resume[map.size()];
+        for (int i = 0; i < map.size(); i++) {
+            values[i] = map.get(uuids[i]);
         }
         return values;
     }
 
     public int size() {
         return map.size();
+    }
+
+    @Override
+    protected String getKey(String uuid) {
+        return uuid;
+    }
+
+    @Override
+    protected boolean isExist(Object uuid) {
+        return map.containsKey(String.valueOf(uuid));
     }
 }
