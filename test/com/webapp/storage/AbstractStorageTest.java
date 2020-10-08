@@ -7,6 +7,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class AbstractStorageTest {
 
     final Storage storage;
@@ -14,10 +17,10 @@ public abstract class AbstractStorageTest {
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
-    private static final Resume RESUME_1 = new Resume(UUID_1);
-    private static final Resume RESUME_2 = new Resume(UUID_2);
-    private static final Resume RESUME_3 = new Resume(UUID_3);
-    private static final Resume RESUME_4 = new Resume(UUID_4);
+    private static final Resume RESUME_1 = new Resume(UUID_1, "fullName1");
+    private static final Resume RESUME_2 = new Resume(UUID_2, "fullName2");
+    private static final Resume RESUME_3 = new Resume(UUID_3, "fullName3");
+    private static final Resume RESUME_4 = new Resume(UUID_4, "fullName4");
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -44,7 +47,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() throws Exception {
-        Resume newResume = new Resume(UUID_1);
+        Resume newResume = new Resume(UUID_1, "fullName1");
         storage.update(newResume);
         Assert.assertSame(newResume, storage.get(UUID_1));
     }
@@ -56,13 +59,12 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAll() throws Exception {
-        Resume[] resumes = storage.getAll();
-        Resume[] resumesTest = {RESUME_1, RESUME_2, RESUME_3};
+        List<Resume> resumes = storage.getAllSorted();
         try {
-            Assert.assertEquals(3, resumes.length);
-            Assert.assertArrayEquals(resumesTest, resumes);
+            Assert.assertEquals(3, resumes.size());
+            Assert.assertEquals(resumes, Arrays.asList(RESUME_1, RESUME_2, RESUME_3));
         } catch (Exception e) {
-            Assert.fail("Resume arrays are not equal");
+            Assert.fail("Resume lists are not equal");
         }
     }
 
