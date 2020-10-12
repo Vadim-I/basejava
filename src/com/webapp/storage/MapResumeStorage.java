@@ -35,10 +35,9 @@ public class MapResumeStorage extends AbstractStorage {
         map.remove(((Resume) resumeKey).getUuid());
     }
 
-    public List<Resume> getAllSorted() {
-        List<Resume> list = new ArrayList<>(map.values());
-        Collections.sort(list);
-        return list;
+    @Override
+    protected List<Resume> copyResumeList() {
+        return new ArrayList<>(map.values());
     }
 
     public int size() {

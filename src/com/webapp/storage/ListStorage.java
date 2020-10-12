@@ -3,7 +3,6 @@ package com.webapp.storage;
 import com.webapp.model.Resume;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,9 +36,9 @@ public class ListStorage extends AbstractStorage {
         list.remove(((Integer) index).intValue());
     }
 
-    public List<Resume> getAllSorted() {
-        Collections.sort(list);
-        return list;
+    @Override
+    protected List<Resume> copyResumeList() {
+        return new ArrayList<>(list);
     }
 
     public int size() {
