@@ -3,7 +3,5 @@ out
 *.iml
 log
 lib
-lesson
 uml
-
-
+/lesson/
