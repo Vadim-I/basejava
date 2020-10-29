@@ -29,6 +29,10 @@ public class Resume implements Comparable<Resume> {
         return contacts;
     }
 
+    public String getContact(ContactType type) {
+        return contacts.get(type);
+    }
+
     public void setContact(ContactType type, String contact) {
         contacts.put(type, contact);
     }
