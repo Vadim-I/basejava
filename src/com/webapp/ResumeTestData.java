@@ -10,10 +10,10 @@ public class ResumeTestData {
 
     public static void main(String[] args) {
 
-// uuid, name
+        // uuid, name
         Resume testResume = new Resume("uuid1", "Григорий Кислин");
 
-// contacts
+        // contacts
         testResume.setContact(ContactType.PHONE, "+7(921) 855-0482");
         testResume.setContact(ContactType.SKYPE, "grigory.kislin");
         testResume.setContact(ContactType.MAIL, "gkislin@yandex.ru");
@@ -22,29 +22,29 @@ public class ResumeTestData {
         testResume.setContact(ContactType.STACKOVERFLOW, "https://stackoverflow.com/users/548473");
         testResume.setContact(ContactType.HOME_PAGE, "http://gkislin.ru/");
 
-// objective
+        // objective
         testResume.setSection(SectionType.OBJECTIVE, new TextSection(
                 "Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
 
-// personal
+        // personal
         testResume.setSection(SectionType.PERSONAL, new TextSection(
                 "Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
 
-// achievement
+        // achievement
         List<String> achievements = new ArrayList<>();
         achievements.add("С 2013 года: разработка проектов \"Разработка Web приложения\",\"Java Enterprise\"");
         achievements.add("Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike");
         achievements.add("Налаживание процесса разработки и непрерывной интеграции ERP системы River BPM");
         testResume.setSection(SectionType.ACHIEVEMENT, new ListSection(achievements));
 
-// qualifications
+        // qualifications
         List<String> skills = new ArrayList<>();
         skills.add("JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2");
         skills.add("Version control: Subversion, Git, Mercury, ClearCase, Perforce");
         skills.add("DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle");
         testResume.setSection(SectionType.QUALIFICATIONS, new ListSection(skills));
 
-// experience
+        // experience
         List<Organization> organizations = new ArrayList<>();
         Organization companyOne = new Organization(
                 "Java Online Projects",
@@ -60,7 +60,7 @@ public class ResumeTestData {
         organizations.add(companyTwo);
         testResume.setSection(SectionType.EXPERIENCE, new OrganizationSection(organizations));
 
-// education
+        // education
         List<Organization> institutions = new ArrayList<>();
         Organization institutionOne = new Organization(
                 "Coursera",

@@ -2,10 +2,9 @@ package com.webapp.model;
 
 import java.util.List;
 
-public class ListSection extends Section{
+public class ListSection extends AbstractSection {
 
     private final List<String> list;
-
 
     public ListSection(List<String> list) {
         this.list = list;
