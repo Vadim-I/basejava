@@ -14,7 +14,7 @@ public class ResumeTestData {
         Resume testResume = new Resume("uuid1", "Григорий Кислин");
 
         // contacts
-        testResume.setContact(ContactType.PHONE, "+7(921) 855-0482");
+        testResume.setContact(ContactType.PHONE, "+7(921)855-0482");
         testResume.setContact(ContactType.SKYPE, "grigory.kislin");
         testResume.setContact(ContactType.MAIL, "gkislin@yandex.ru");
         testResume.setContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/gkislin");
@@ -24,16 +24,16 @@ public class ResumeTestData {
 
         // objective
         testResume.setSection(SectionType.OBJECTIVE, new TextSection(
-                "Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
+                "Ведущий стажировок и корпоративного обучения по Java"));
 
         // personal
         testResume.setSection(SectionType.PERSONAL, new TextSection(
-                "Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
+                "Аналитический склад ума, сильная логика, креативность, инициативность"));
 
         // achievement
         List<String> achievements = new ArrayList<>();
-        achievements.add("С 2013 года: разработка проектов \"Разработка Web приложения\",\"Java Enterprise\"");
-        achievements.add("Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike");
+        achievements.add("Разработка проектов \"Разработка Web приложения\",\"Java Enterprise\"");
+        achievements.add("Реализация двухфакторной аутентификации для онлайн платформы управления проектами");
         achievements.add("Налаживание процесса разработки и непрерывной интеграции ERP системы River BPM");
         testResume.setSection(SectionType.ACHIEVEMENT, new ListSection(achievements));
 
@@ -46,33 +46,34 @@ public class ResumeTestData {
 
         // experience
         List<Organization> organizations = new ArrayList<>();
-        Organization companyOne = new Organization(
-                "Java Online Projects",
+        List<Organization.Position> positionsOfCompanyOne = new ArrayList<>();
+        positionsOfCompanyOne.add(new Organization.Position(
                 YearMonth.of(2013, 10),
                 YearMonth.of(2020, 10),
-                "Автор проекта");
-        organizations.add(companyOne);
-        Organization companyTwo = new Organization(
-                "Wrike",
+                "Автор проекта"));
+        organizations.add(new Organization("Java Online Projects", positionsOfCompanyOne));
+        List<Organization.Position> positionsOfCompanyTwo = new ArrayList<>();
+        positionsOfCompanyTwo.add(new Organization.Position(
                 YearMonth.of(2014, 10),
                 YearMonth.of(2016, 1),
-                "Старший разработчик (backend)");
-        organizations.add(companyTwo);
+                "Старший разработчик (backend)"));
+        organizations.add(new Organization("Wrike", positionsOfCompanyTwo));
         testResume.setSection(SectionType.EXPERIENCE, new OrganizationSection(organizations));
 
         // education
         List<Organization> institutions = new ArrayList<>();
-        Organization institutionOne = new Organization(
-                "Coursera",
+        List<Organization.Position> positionsOfInstituteOne = new ArrayList<>();
+        positionsOfInstituteOne.add(new Organization.Position(
                 YearMonth.of(2013, 3),
                 YearMonth.of(2013, 5),
-                "\"Functional Programming Principles in Scala\" by Martin Odersky");
-        institutions.add(institutionOne);
-        Organization institutionTwo = new Organization("Luxoft",
+                "Functional Programming Principles in Scala"));
+        institutions.add(new Organization("Coursera", positionsOfInstituteOne));
+        List<Organization.Position> positionsOfInstituteTwo = new ArrayList<>();
+        positionsOfInstituteTwo.add(new Organization.Position(
                 YearMonth.of(2011, 3),
                 YearMonth.of(2011, 4),
-                "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\"");
-        institutions.add(institutionTwo);
+                "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\""));
+        institutions.add(new Organization("Luxoft", positionsOfInstituteTwo));
         testResume.setSection(SectionType.EDUCATION, new OrganizationSection(institutions));
 
         System.out.println("Person:\n" + testResume.toString());
@@ -83,6 +84,75 @@ public class ResumeTestData {
         System.out.println("QUALIFICATIONS:\n" + testResume.getSection(SectionType.QUALIFICATIONS));
         System.out.println("EXPERIENCE:\n" + testResume.getSection(SectionType.EXPERIENCE));
         System.out.println("EDUCATION:\n" + testResume.getSection(SectionType.EDUCATION));
+    }
+
+    public static Resume createResume(String uuid, String fullName) {
+
+        Resume newResume = new Resume(uuid, fullName);
+
+        newResume.setContact(ContactType.PHONE, "+7(900)000-0000");
+        newResume.setContact(ContactType.SKYPE, "ivan.ivanov");
+        newResume.setContact(ContactType.MAIL, "ivanov@yandex.ru");
+        newResume.setContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
+        newResume.setContact(ContactType.GITHUB, "https://github.com/ivanov");
+        newResume.setContact(ContactType.STACKOVERFLOW, "https://stackoverflow.com/users/000000");
+        newResume.setContact(ContactType.HOME_PAGE, "http://ivanov.ru/");
+
+        newResume.setSection(SectionType.OBJECTIVE, new TextSection("Java-разработчик"));
+
+        newResume.setSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума"));
+
+        // achievement
+        List<String> achievements = new ArrayList<>();
+        achievements.add("Разработка Web приложений");
+        achievements.add("Реализация аутентификации для онлайн платформы");
+        achievements.add("Налаживание процесса разработки ERP системы");
+        newResume.setSection(SectionType.ACHIEVEMENT, new ListSection(achievements));
+
+        // qualifications
+        List<String> skills = new ArrayList<>();
+        skills.add("JEE AS: GlassFish (v2.1, v3), Tomcat");
+        skills.add("Git, Mercury, ClearCase, Perforce");
+        skills.add("DB: PostgreSQL, Redis, H2, Oracle");
+        newResume.setSection(SectionType.QUALIFICATIONS, new ListSection(skills));
+
+        // experience
+        List<Organization> organizations = new ArrayList<>();
+        List<Organization.Position> positionsOfCompanyOne = new ArrayList<>();
+        positionsOfCompanyOne.add(new Organization.Position(
+                YearMonth.of(2018, 10),
+                YearMonth.of(2020, 10),
+                "Middle Java-разработчик"));
+        positionsOfCompanyOne.add(new Organization.Position(
+                YearMonth.of(2015, 10),
+                YearMonth.of(2018, 10),
+                "Junior Java-разработчик"));
+        organizations.add(new Organization("CompanyOne", positionsOfCompanyOne));
+        List<Organization.Position> positionsOfCompanyTwo = new ArrayList<>();
+        positionsOfCompanyTwo.add(new Organization.Position(
+                YearMonth.of(2014, 10),
+                YearMonth.of(2015, 9),
+                "Старший разработчик (backend)"));
+        organizations.add(new Organization("CompanyTwo", positionsOfCompanyTwo));
+        newResume.setSection(SectionType.EXPERIENCE, new OrganizationSection(organizations));
+
+        // education
+        List<Organization> institutions = new ArrayList<>();
+        List<Organization.Position> positionsOfInstituteOne = new ArrayList<>();
+        positionsOfInstituteOne.add(new Organization.Position(
+                YearMonth.of(2013, 3),
+                YearMonth.of(2013, 5),
+                "Functional Programming"));
+        institutions.add(new Organization("Coursera", positionsOfInstituteOne));
+        List<Organization.Position> positionsOfInstituteTwo = new ArrayList<>();
+        positionsOfInstituteTwo.add(new Organization.Position(
+                YearMonth.of(2011, 3),
+                YearMonth.of(2011, 4),
+                "Java-programming"));
+        institutions.add(new Organization("Luxoft", positionsOfInstituteTwo));
+        newResume.setSection(SectionType.EDUCATION, new OrganizationSection(institutions));
+
+        return newResume;
     }
 }
 
