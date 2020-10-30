@@ -6,10 +6,12 @@ import java.util.List;
 public class Organization {
 
     private final String name;
+    private final String url;
     private final List<Position> positions;
 
-    public Organization(String name, List<Position> positions) {
+    public Organization(String name, String url, List<Position> positions) {
         this.name = name;
+        this.url = url;
         this.positions = positions;
     }
 
@@ -21,18 +23,20 @@ public class Organization {
         Organization organization = (Organization) o;
 
         return name.equals(organization.name)
+                && url.equals(organization.url)
                 && positions.equals(organization.positions);
     }
 
     @Override
     public int hashCode() {
-        return 31 * name.hashCode() + positions.hashCode();
+        return 31 * name.hashCode() + 31 * url.hashCode() + positions.hashCode();
     }
 
     @Override
     public String toString() {
         return "Organization {" +
                 "Name = " + name +
+                "Url = " + url +
                 ", Position = " + positions +
                 "}";
     }

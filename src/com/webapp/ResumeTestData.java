@@ -51,13 +51,13 @@ public class ResumeTestData {
                 YearMonth.of(2013, 10),
                 YearMonth.of(2020, 10),
                 "Автор проекта"));
-        organizations.add(new Organization("Java Online Projects", positionsOfCompanyOne));
+        organizations.add(new Organization("Java Online Projects", "https://javaops.ru", positionsOfCompanyOne));
         List<Organization.Position> positionsOfCompanyTwo = new ArrayList<>();
         positionsOfCompanyTwo.add(new Organization.Position(
                 YearMonth.of(2014, 10),
                 YearMonth.of(2016, 1),
                 "Старший разработчик (backend)"));
-        organizations.add(new Organization("Wrike", positionsOfCompanyTwo));
+        organizations.add(new Organization("Wrike", "https://wrike.ru", positionsOfCompanyTwo));
         testResume.setSection(SectionType.EXPERIENCE, new OrganizationSection(organizations));
 
         // education
@@ -67,13 +67,13 @@ public class ResumeTestData {
                 YearMonth.of(2013, 3),
                 YearMonth.of(2013, 5),
                 "Functional Programming Principles in Scala"));
-        institutions.add(new Organization("Coursera", positionsOfInstituteOne));
+        institutions.add(new Organization("Coursera", "https://coursera.org", positionsOfInstituteOne));
         List<Organization.Position> positionsOfInstituteTwo = new ArrayList<>();
         positionsOfInstituteTwo.add(new Organization.Position(
                 YearMonth.of(2011, 3),
                 YearMonth.of(2011, 4),
                 "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\""));
-        institutions.add(new Organization("Luxoft", positionsOfInstituteTwo));
+        institutions.add(new Organization("Luxoft", "https://luxoft.ru", positionsOfInstituteTwo));
         testResume.setSection(SectionType.EDUCATION, new OrganizationSection(institutions));
 
         System.out.println("Person:\n" + testResume.toString());
@@ -127,13 +127,13 @@ public class ResumeTestData {
                 YearMonth.of(2015, 10),
                 YearMonth.of(2018, 10),
                 "Junior Java-разработчик"));
-        organizations.add(new Organization("CompanyOne", positionsOfCompanyOne));
+        organizations.add(new Organization("CompanyOne", "https://companyone.ru", positionsOfCompanyOne));
         List<Organization.Position> positionsOfCompanyTwo = new ArrayList<>();
         positionsOfCompanyTwo.add(new Organization.Position(
                 YearMonth.of(2014, 10),
                 YearMonth.of(2015, 9),
                 "Старший разработчик (backend)"));
-        organizations.add(new Organization("CompanyTwo", positionsOfCompanyTwo));
+        organizations.add(new Organization("CompanyTwo", "https://companytwo.ru", positionsOfCompanyTwo));
         newResume.setSection(SectionType.EXPERIENCE, new OrganizationSection(organizations));
 
         // education
@@ -143,13 +143,13 @@ public class ResumeTestData {
                 YearMonth.of(2013, 3),
                 YearMonth.of(2013, 5),
                 "Functional Programming"));
-        institutions.add(new Organization("Coursera", positionsOfInstituteOne));
+        institutions.add(new Organization("Coursera", "https://coursera.org", positionsOfInstituteOne));
         List<Organization.Position> positionsOfInstituteTwo = new ArrayList<>();
         positionsOfInstituteTwo.add(new Organization.Position(
                 YearMonth.of(2011, 3),
                 YearMonth.of(2011, 4),
                 "Java-programming"));
-        institutions.add(new Organization("Luxoft", positionsOfInstituteTwo));
+        institutions.add(new Organization("Luxoft", "https://luxoft.ru", positionsOfInstituteTwo));
         newResume.setSection(SectionType.EDUCATION, new OrganizationSection(institutions));
 
         return newResume;
