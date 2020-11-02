@@ -1,9 +1,12 @@
 package com.webapp.model;
 
+import java.io.Serializable;
 import java.time.YearMonth;
 import java.util.List;
 
-public class Organization {
+public class Organization implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private final String name;
     private final String url;
@@ -41,7 +44,7 @@ public class Organization {
                 "}";
     }
 
-    public static class Position {
+    public static class Position implements Serializable {
 
         private final YearMonth startDate;
         private final YearMonth endDate;
