@@ -26,9 +26,11 @@ public class MainFile {
             }
         }
 
-        // recursive traversal and output of filenames in directories and subdirectories
         File rootDir = new File(".");
+        // recursive traversal and output of filenames in directories and subdirectories
         printFilenames(rootDir);
+        // recursive output of directories and files with offsets
+        printFilesWithOffsets(rootDir, "");
 
         try (FileInputStream fis = new FileInputStream(filePath)) {
             System.out.println(fis.read());
@@ -46,6 +48,22 @@ public class MainFile {
                         printFilenames(file);
                     } else {
                         System.out.println(file.getName());
+                    }
+                }
+            }
+        }
+    }
+
+    private static void printFilesWithOffsets(File rootDir, String offset) {
+        if (rootDir.isDirectory()) {
+            File[] directoryFiles = rootDir.listFiles();
+            if (directoryFiles != null) {
+                for (File file : directoryFiles) {
+                    if (file.isDirectory()) {
+                        System.out.println(offset + "D: " + file.getName());
+                        printFilesWithOffsets(file, offset + "  ");
+                    } else {
+                        System.out.println(offset + "F: " + file.getName());
                     }
                 }
             }
