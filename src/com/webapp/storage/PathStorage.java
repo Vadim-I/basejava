@@ -78,7 +78,7 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     protected List<Resume> copyResumeList() {
-        return Objects.requireNonNull(getFilesList()).map(this::getResume).collect(Collectors.toList());
+        return getFilesList().map(this::getResume).collect(Collectors.toList());
     }
 
     @Override
@@ -95,8 +95,7 @@ public class PathStorage extends AbstractStorage<Path> {
         try {
             return Files.list(directory);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new StorageException("Directory read error", e);
         }
-        return null;
     }
 }
