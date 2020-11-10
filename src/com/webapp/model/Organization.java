@@ -1,16 +1,25 @@
 package com.webapp.model;
 
+import com.webapp.util.DateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.YearMonth;
 import java.util.List;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final String name;
-    private final String url;
-    private final List<Position> positions;
+    private String name;
+    private String url;
+    private List<Position> positions;
+
+    public Organization() {
+    }
 
     public Organization(String name, String url, List<Position> positions) {
         this.name = name;
@@ -44,11 +53,17 @@ public class Organization implements Serializable {
                 "}";
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class Position implements Serializable {
 
-        private final YearMonth startDate;
-        private final YearMonth endDate;
-        private final String description;
+        @XmlJavaTypeAdapter(DateAdapter.class)
+        private YearMonth startDate;
+        @XmlJavaTypeAdapter(DateAdapter.class)
+        private YearMonth endDate;
+        private String description;
+
+        public Position() {
+        }
 
         public Position(YearMonth startDate, YearMonth endDate, String description) {
             this.startDate = startDate;

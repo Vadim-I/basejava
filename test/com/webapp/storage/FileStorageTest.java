@@ -1,5 +1,7 @@
 package com.webapp.storage;
 
+import com.webapp.storage.serializer.ObjectStreamSerializer;
+
 public class FileStorageTest extends AbstractStorageTest {
 
     public FileStorageTest() {
