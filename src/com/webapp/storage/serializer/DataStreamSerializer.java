@@ -44,6 +44,7 @@ public class DataStreamSerializer implements StreamSerializer {
                             writeCollection(dos, org.getPositions(), position -> {
                                 writeYearMonth(dos, position.getStartDate());
                                 writeYearMonth(dos, position.getEndDate());
+                                dos.writeUTF(position.getTitle());
                                 dos.writeUTF(position.getDescription());
                             });
                         });
@@ -89,7 +90,7 @@ public class DataStreamSerializer implements StreamSerializer {
                 return new OrganizationSection(
                         readList(dis, () -> new Organization(
                                 dis.readUTF(), dis.readUTF(), readList(dis, () -> new Organization.Position(
-                                readYearMonth(dis), readYearMonth(dis), dis.readUTF()
+                                readYearMonth(dis), readYearMonth(dis), dis.readUTF(), dis.readUTF()
                         ))
                         )));
             default:

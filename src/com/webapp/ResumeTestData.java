@@ -50,13 +50,15 @@ public class ResumeTestData {
         positionsOfCompanyOne.add(new Organization.Position(
                 YearMonth.of(2013, 10),
                 YearMonth.of(2020, 10),
-                "Автор проекта"));
+                "Автор проекта",
+                "Обучение разработке на Java"));
         organizations.add(new Organization("Java Online Projects", "https://javaops.ru", positionsOfCompanyOne));
         List<Organization.Position> positionsOfCompanyTwo = new ArrayList<>();
         positionsOfCompanyTwo.add(new Organization.Position(
                 YearMonth.of(2014, 10),
                 YearMonth.of(2016, 1),
-                "Старший разработчик (backend)"));
+                "Старший разработчик (backend)",
+                "Разработка серверной логики"));
         organizations.add(new Organization("Wrike", "https://wrike.ru", positionsOfCompanyTwo));
         testResume.setSection(SectionType.EXPERIENCE, new OrganizationSection(organizations));
 
@@ -66,12 +68,14 @@ public class ResumeTestData {
         positionsOfInstituteOne.add(new Organization.Position(
                 YearMonth.of(2013, 3),
                 YearMonth.of(2013, 5),
+                "Listener",
                 "Functional Programming Principles in Scala"));
         institutions.add(new Organization("Coursera", "https://coursera.org", positionsOfInstituteOne));
         List<Organization.Position> positionsOfInstituteTwo = new ArrayList<>();
         positionsOfInstituteTwo.add(new Organization.Position(
                 YearMonth.of(2011, 3),
                 YearMonth.of(2011, 4),
+                "Listener",
                 "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\""));
         institutions.add(new Organization("Luxoft", "https://luxoft.ru", positionsOfInstituteTwo));
         testResume.setSection(SectionType.EDUCATION, new OrganizationSection(institutions));
@@ -122,17 +126,20 @@ public class ResumeTestData {
         positionsOfCompanyOne.add(new Organization.Position(
                 YearMonth.of(2018, 10),
                 YearMonth.of(2020, 10),
-                "Middle Java-разработчик"));
+                "Middle Java-разработчик",
+                "Programming backend"));
         positionsOfCompanyOne.add(new Organization.Position(
                 YearMonth.of(2015, 10),
                 YearMonth.of(2018, 10),
-                "Junior Java-разработчик"));
+                "Junior Java-разработчик",
+                "Programming, testing application"));
         organizations.add(new Organization("CompanyOne", "https://companyone.ru", positionsOfCompanyOne));
         List<Organization.Position> positionsOfCompanyTwo = new ArrayList<>();
         positionsOfCompanyTwo.add(new Organization.Position(
                 YearMonth.of(2014, 10),
                 YearMonth.of(2015, 9),
-                "Старший разработчик (backend)"));
+                "Старший разработчик (backend)",
+                "Programming backend"));
         organizations.add(new Organization("CompanyTwo", "https://companytwo.ru", positionsOfCompanyTwo));
         newResume.setSection(SectionType.EXPERIENCE, new OrganizationSection(organizations));
 
@@ -142,12 +149,14 @@ public class ResumeTestData {
         positionsOfInstituteOne.add(new Organization.Position(
                 YearMonth.of(2013, 3),
                 YearMonth.of(2013, 5),
+                "Listener",
                 "Functional Programming"));
         institutions.add(new Organization("Coursera", "https://coursera.org", positionsOfInstituteOne));
         List<Organization.Position> positionsOfInstituteTwo = new ArrayList<>();
         positionsOfInstituteTwo.add(new Organization.Position(
                 YearMonth.of(2011, 3),
                 YearMonth.of(2011, 4),
+                "Listener",
                 "Java-programming"));
         institutions.add(new Organization("Luxoft", "https://luxoft.ru", positionsOfInstituteTwo));
         newResume.setSection(SectionType.EDUCATION, new OrganizationSection(institutions));

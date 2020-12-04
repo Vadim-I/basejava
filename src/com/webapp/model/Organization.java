@@ -23,7 +23,7 @@ public class Organization implements Serializable {
 
     public Organization(String name, String url, List<Position> positions) {
         this.name = name;
-        this.url = url;
+        this.url = (url == null) ? "" : url;
         this.positions = positions;
     }
 
@@ -72,15 +72,17 @@ public class Organization implements Serializable {
         private YearMonth startDate;
         @XmlJavaTypeAdapter(DateAdapter.class)
         private YearMonth endDate;
+        private String title;
         private String description;
 
         public Position() {
         }
 
-        public Position(YearMonth startDate, YearMonth endDate, String description) {
+        public Position(YearMonth startDate, YearMonth endDate, String title, String description) {
             this.startDate = startDate;
             this.endDate = endDate;
-            this.description = description;
+            this.title = title;
+            this.description = (description == null) ? "" : description;
         }
 
         public YearMonth getStartDate() {
@@ -88,6 +90,10 @@ public class Organization implements Serializable {
         }
         public YearMonth getEndDate() {
             return endDate;
+        }
+
+        public String getTitle() {
+            return title;
         }
 
         public String getDescription() {
@@ -103,6 +109,7 @@ public class Organization implements Serializable {
 
             return startDate.equals(position.startDate)
                     && endDate.equals(position.endDate)
+                    && title.equals(position.title)
                     && description.equals(position.description);
         }
 
@@ -110,6 +117,7 @@ public class Organization implements Serializable {
         public int hashCode() {
             int hashCodeNumber = startDate.hashCode();
             hashCodeNumber = 31 * hashCodeNumber + endDate.hashCode();
+            hashCodeNumber = 31 * hashCodeNumber + title.hashCode();
             hashCodeNumber = 31 * hashCodeNumber + description.hashCode();
             return hashCodeNumber;
         }
@@ -119,6 +127,7 @@ public class Organization implements Serializable {
             return "Position {" +
                     "startDate = " + startDate +
                     ", endDate = " + endDate +
+                    ", title = " + title +
                     ", description = " + description +
                     "}";
         }
