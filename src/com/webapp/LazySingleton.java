@@ -1,4 +1,4 @@
-package com.webapp.util;
+package com.webapp;
 
 public class LazySingleton {
 
