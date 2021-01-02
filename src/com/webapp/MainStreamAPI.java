@@ -38,7 +38,7 @@ public class MainStreamAPI {
         boolean isSumEven = (integers.stream()
                     .reduce(0, Integer::sum)) % 2 == 0;
         return integers.stream()
-                .filter(x -> (isSumEven && (x % 2 != 0)) || (!isSumEven && (x % 2 == 0)))
+                .filter(x -> isSumEven == (x % 2 != 0))
                 .collect(Collectors.toList());
     }
 }
