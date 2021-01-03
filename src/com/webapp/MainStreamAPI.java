@@ -35,10 +35,10 @@ public class MainStreamAPI {
     }
 
     public static List<Integer> oddOrEven(List<Integer> integers) {
-        boolean isSumEven = (integers.stream()
-                    .reduce(0, Integer::sum)) % 2 == 0;
+        int sum = integers.stream()
+                    .reduce(0, Integer::sum);
         return integers.stream()
-                .filter(x -> isSumEven == (x % 2 != 0))
+                .filter(x -> (sum % 2 == 0) == (x % 2 != 0))
                 .collect(Collectors.toList());
     }
 }
